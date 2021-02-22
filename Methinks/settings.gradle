@@ -1,0 +1,2 @@
+include ':methinksdk', ':networkmanager', ':fingerprintmanager', ':activitylogmanager', ':inappsurveymod'
+project(':inappsurveymod').projectDir = new File('inappsurvey')

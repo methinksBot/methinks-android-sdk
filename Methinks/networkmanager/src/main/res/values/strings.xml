@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">NetworkManager</string>
+    <string name="AppId">6uXTD8XOyunDMpB7RZpj</string>
+    <string name="RestAPIKey">85cDUSx0U0TAGZsbyhTs</string>
+    <string name="AppIdDev">mySDKAppId</string>
+    <string name="RestAPIKeyDev">myRESTAPIKey</string>
+</resources>
