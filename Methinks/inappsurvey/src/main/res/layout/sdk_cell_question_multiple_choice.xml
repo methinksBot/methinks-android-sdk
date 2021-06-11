@@ -1,83 +1,125 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:id="@+id/cell_multiple_choice_main_layout"
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="horizontal"
-    android:paddingTop="@dimen/question_multiple_choice_top_bottom_padding"
-    android:paddingBottom="@dimen/question_multiple_choice_top_bottom_padding"
-    android:paddingLeft="24dp"
-    android:paddingRight="16dp"
-    android:focusable="true"
-
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-    <ImageView
-        android:id="@+id/check_box"
-        android:src="@drawable/ic_img_single_select_nor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-    <LinearLayout
-        android:id="@+id/choice_form"
-        android:orientation="vertical"
-        android:visibility="visible"
-        android:layout_marginLeft="24dp"
-        android:layout_weight="1"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content">
-        <io.mtksdk.inappsurvey.custom.widget.MethinksTextView
-            android:id="@+id/choice"
-            android:maxLines="3"
-            android:textSize="14dp"
-            app:fw="@string/font_weight_regular"
-
-            android:textColor="@color/charcoal_grey"
-            android:lineSpacingExtra="6dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <View
-            android:id="@+id/underline"
-            android:layout_marginTop="2dp"
-            android:background="@color/pale_grey_two"
-            android:layout_width="match_parent"
-            android:layout_height="1dp" />
-    </LinearLayout>
-
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cell_multiple_choice_main_layout"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
-        android:id="@+id/open_end_answer_form"
-        android:visibility="gone"
-        android:orientation="vertical"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:layout_marginLeft="24dp"
+        android:id="@+id/ll_text_container"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/mtk_survey_multiple_choice_rounded_6"
+        android:orientation="horizontal"
+        android:padding="1dp"
+        android:gravity="center_vertical"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="8dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <io.mtksdk.inappsurvey.custom.widget.MethinksEditText
-            android:id="@+id/open_end_answer"
-            android:textCursorDrawable="@null"
-            android:hint="@string/common_text_other"
-            android:imeOptions="actionDone"
-            android:textColorHint="@color/silver"
-            android:background="@android:color/transparent"
-            android:maxLines="1"
-            android:textSize="14dp"
-            app:fw="@string/font_weight_regular"
-            android:textColor="@color/charcoal_grey"
-            android:letterSpacing="0.02"
-            android:lineSpacingExtra="12dp"
-            android:inputType="textCapSentences"
+
+        <ImageView
+            android:id="@+id/iv_choice"
+            android:src="@drawable/mtk_survey_single_choice_icon"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_gravity="center_vertical"
+            android:layout_width="24dp"
+            android:layout_height="24dp" />
+
+        <io.mtksdk.inappsurvey.custom.widget.MethinksTextView
+            android:id="@+id/tv_rank"
+            android:visibility="gone"
+            tools:visibility="gone"
+            tools:text="3"
+            android:textColor="@color/lightTextColor"
+            android:textSize="17sp"
+            android:gravity="center"
+            android:background="@drawable/mtk_survey_rankbox_background"
+            android:layout_marginStart="13dp"
+            android:layout_marginEnd="13dp"
+            android:layout_gravity="center_vertical"
+            android:layout_width="30dp"
+            android:layout_height="30dp" />
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <View
-            android:id="@+id/open_end_answer_underline"
-            android:layout_marginTop="2dp"
-            android:background="@color/pale_grey_two"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginRight="16dp"
+            android:id="@+id/non_lastEntry">
+            <ImageView
+                android:id="@+id/iv_image"
+                android:visibility="gone"
+                tools:visibility="visible"
+                android:scaleType="fitStart"
+                android:adjustViewBounds="true"
+                android:layout_width="wrap_content"
+                android:layout_height="120dp"
+                android:layout_marginTop="14dp"
+                android:layout_marginStart = "20dp"/>
+
+            <ProgressBar
+                android:id="@+id/pb_loading"
+                android:visibility="gone"
+                android:layout_centerInParent="true"
+                android:adjustViewBounds="true"
+                style="?android:attr/progressBarStyleSmall"
+                android:indeterminate="true"
+                android:indeterminateTint="@color/baseSeperator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <io.mtksdk.inappsurvey.custom.widget.MethinksTextView
+                android:id="@+id/tv_text"
+                android:visibility="visible"
+                android:textSize="16sp"
+                android:lineSpacingExtra="6sp"
+                android:layout_weight="1"
+                android:layout_marginVertical="16dp"
+                android:layout_marginLeft = "20dp"
+                android:textColor="@color/baseTextColor"
+                tools:text="text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_text_entry_container"
+            android:visibility="gone"
+            tools:visibility="visible"
+            android:orientation="vertical"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="16dp"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             android:layout_width="match_parent"
-            android:layout_height="1dp" />
+            android:layout_height="wrap_content" >
+
+            <io.mtksdk.inappsurvey.custom.widget.MethinksEditText
+                android:id="@+id/ev_answer"
+                android:textCursorDrawable="@null"
+                android:inputType="textCapSentences"
+                android:imeOptions="actionDone"
+                android:background="@android:color/transparent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/common_text_other"
+                android:textColor="@color/baseTextColor"
+                android:maxLines="1"
+                android:backgroundTint="@color/baseSeperator"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
+                android:textSize="16sp"
+                android:lineSpacingExtra="6dp"/>
+
+        </LinearLayout>
+
     </LinearLayout>
 
-
-
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

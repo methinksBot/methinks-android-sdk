@@ -29,8 +29,8 @@
                 android:id="@+id/close_methinks_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:textSize="20dp"/>
+                android:textColor="@color/baseTextColor"
+                android:textSize="20sp"/>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#327BF5</color>
-    <!--    <color name="colorPrimary">#007AFF</color>-->
+    <color name="colorPrimary">#3885F6</color>
+    <!--    <color name="colorPrimary">#0A84FF</color>-->
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#34C759</color>
+    <color name="colorAccent">#30D158</color>
 
     <color name="dusk">#415871</color>
     <color name="dusk_two_70">#b24b4761</color>
@@ -202,57 +202,54 @@
     <color name="pale_grey_eleven">#f6f7fa</color>
     <color name="transparent">#00FFFFFF</color>
 
-    <color name="primaryColor">#327BF5</color>
-    <color name="primaryVariantColor">#003FBB</color>
-    <color name="secondaryColor">#27AE60</color>
-    <color name="secondaryVariantColor">#219653</color>
 
-    <color name="primaryTextColor">#FF000000</color>
-    <color name="secondaryTextColor">#993C3C43</color>
 
-    <color name="baseBackgroundColor">#F9F9F9</color>
-    <color name="base2BackgroundColor">#FFFFFF</color>
-    <color name="base3BackgroundColor">#EFEFF4</color>
+    <color name="primaryColor">#3885F6</color>
+    <!--    <color name="primaryColor">#4678F1</color>-->
+    <color name="primaryVariantColor">#83A6FF</color>
+    <color name="secondaryColor">#6FCF97</color>
+    <color name="secondaryVariantColor">#BAE8CD</color>
 
+
+    <color name="primaryTextColor">#FFffffff</color>
+    <color name="secondaryTextColor">#99EBEBF5</color>
+    <color name="baseBackgroundColor">#000000</color>
+    <!--    <color name="base2BackgroundColor">#4A4A50</color>-->
+    <color name="base3BackgroundColor">#2C2C2E</color>
+    <!--    <color name="baseBackgroundColor">#000000</color>-->
+    <color name="base2BackgroundColor">#1C1C1E</color>
+    <!--    <color name="base3BackgroundColor">#2C2C2E</color>-->
+
+
+    <color name="baseTextColor">#FFFFFFFF</color>
+    <color name="base2TextColor">#99EBEBF5</color>
+    <color name="base3TextColor">#4DEBEBF4</color>
 
     <color name="lightTextColor">#FFFFFFFF</color>
     <color name="lightText2Color">#99EBEBF5</color>
     <color name="darkTextColor">#FF000000</color>
     <color name="darkText2Color">#993C3C43</color>
 
-    <color name="baseTextColor">#FF000000</color>
-    <color name="base2TextColor">#993C3C43</color>
-    <color name="base3TextColor">#4D3C3C43</color>
+    <color name="baseYellow">#FFD60A</color>
+    <color name="baseGreen">#32D74B</color>
+    <color name="baseRed">#FF453A</color>
+    <color name="baseIndigo">#5E5CE6</color>
+    <color name="baseCyan">#00A1BD</color>
+    <color name="basePurple">#BF5AF2</color>
+    <color name="baseOrange">#FF9F0A</color>
+    <color name="baseTeal">#64D2FF</color>
 
+    <color name="baseSeperator">#545458</color>
 
-    <color name="baseYellow">#FFCC00</color>
-    <color name="baseGreen">#34C759</color>
-    <color name="baseRed">#FF3B30</color>
-    <color name="baseIndigo">#5856D6</color>
-    <color name="baseCyan">#008ba3</color>
-    <color name="basePurple">#AF52DE</color>
-    <color name="baseOrange">#FF9500</color>
-    <color name="baseTeal">#5AC8FA</color>
-
-
-    <color name="baseGray">#8E8E93</color>
-    <color name="baseGray2">#AEAEB2</color>
-    <color name="baseGray3">#C7C7CC</color>
-    <color name="baseGray4">#E5E5EA</color>
-    <color name="baseGray5">#F2F2F7</color>
-    <color name="baseGray5Alpha80">#80F2F2F7</color>
-
-    <color name="baseSeperator">#C6C6C8</color>
-
-    <color name="rippleColor">#423068EF</color>
-
+    <color name="rippleColor">#424678F1</color>
 
     <color name="videoChatBackground">#202124</color>
     <color name="videoChatButtonBackground">#313131</color>
 
-    <color name="light_blue_400">#FF29B6F6</color>
-    <color name="light_blue_600">#FF039BE5</color>
-    <color name="gray_400">#FFBDBDBD</color>
-    <color name="gray_600">#FF757575</color>
-
+    <color name="baseGray">#8E8E93</color>
+    <color name="baseGray2">#636366</color>
+    <color name="baseGray3">#48484A</color>
+    <color name="baseGray4">#3A3A3C</color>
+    <color name="baseGray5">#2C2C2E</color>
+    <color name="baseGray5Alpha80">#802C2C2E</color>
 </resources>

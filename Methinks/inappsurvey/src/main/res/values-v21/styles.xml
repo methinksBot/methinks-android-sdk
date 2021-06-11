@@ -337,7 +337,7 @@
     <style name="AppModalStyle"
         parent="Widget.Design.BottomSheet.Modal">
         <item name="android:background">@drawable/sdk_white_full_rounded_background</item>
-    </style>
+    </style>ß
 
     <style name="BottomSheetDialog" parent="Theme.Design.Light.BottomSheetDialog">
         <item name="bottomSheetStyle">@style/bottomSheetStyleWrapper</item>
@@ -347,7 +347,7 @@
         <item name="android:background">@android:color/transparent</item>
     </style>
 
-    <style name="Theme.Transparent" parent="android:Theme">
+    <style name="Theme.Transparent" parent="Theme.MaterialComponents">
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowContentOverlay">@null</item>
@@ -355,6 +355,5 @@
         <item name="android:windowIsFloating">true</item>
         <item name="android:backgroundDimEnabled">false</item>
     </style>
-
 
 </resources>

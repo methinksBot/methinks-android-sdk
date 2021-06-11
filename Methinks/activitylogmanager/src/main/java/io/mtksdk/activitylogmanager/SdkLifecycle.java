@@ -52,6 +52,7 @@ public class SdkLifecycle{
 
     public static void init(final Application app) {
         Log.i("SdkLifecycle", "SDK Initiated");
+        Log.i("SdkDevId", NetworkConstant.devId);
         callbacks = new Application.ActivityLifecycleCallbacks() {
             @Override
             public void onActivityCreated(@NonNull Activity activity, @Nullable Bundle bundle) {
@@ -88,6 +89,7 @@ public class SdkLifecycle{
                             JSONArray logJson = new JSONArray(savedBeforeTerm);
                             sendLogSession(logJson, sId, savedEventBeforeTerm);
                         }
+                        //shower gunyeop gi mo zzi
 
                         if (NetworkConstant.isSetUserCalled != null && NetworkConstant.isSetUserCalled && NetworkConstant.userId != null && NetworkConstant.userId.length() != 0) {
                             setUser(NetworkConstant.userId);

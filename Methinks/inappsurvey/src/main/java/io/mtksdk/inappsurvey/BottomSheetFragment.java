@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -151,13 +152,16 @@ public class BottomSheetFragment extends DialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View bottomSheetView = inflater.inflate(R.layout.sdk_activity_question, null);
-        final MethinksTextView submit = bottomSheetView.findViewById(R.id.submit);
-        final MethinksTextView closeSurvey = bottomSheetView.findViewById(R.id.finish_button);
+        bottomSheetView.setClipToOutline(true);
+        final Button nextButton = bottomSheetView.findViewById(R.id.next_button);
+        final Button completeButton = bottomSheetView.findViewById(R.id.complete_button);
+        final Button skipButton = bottomSheetView.findViewById(R.id.skip_button);
+
         final ImageView logo = bottomSheetView.findViewById(R.id.logo);
         final MethinksTextView logoText = bottomSheetView.findViewById(R.id.logo_text);
         final LinearLayout space = bottomSheetView.findViewById(R.id.space);
 
-        closeSurvey.setOnClickListener(new View.OnClickListener() {
+        completeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 getDialog().dismiss();
@@ -174,7 +178,7 @@ public class BottomSheetFragment extends DialogFragment {
         cache = new HashMap<>();
 
         viewPager = bottomSheetView.findViewById(R.id.view_pager);
-        ArrayList<Question> questionPacks = ViewConstant.sectionContainer.get(ViewConstant.firstSectionId).getQuestionPacks();
+        final ArrayList<Question> questionPacks = ViewConstant.sectionContainer.get(ViewConstant.firstSectionId).getQuestionPacks();
         adapter = new ViewControllerAdapter(getChildFragmentManager(), answerMap, questionPacks);
         viewPager.setAdapter(adapter);
 
@@ -184,7 +188,7 @@ public class BottomSheetFragment extends DialogFragment {
         if (currOrientation == Configuration.ORIENTATION_PORTRAIT) {
             if (startingType.equals("intro")) {
                 params.height = this.screenHeightP / 4;
-                submit.setText("Start");
+//                submit.setText("Start");
             } else if (startingType.equals("likert") || startingType.equals("smiley")) {
                 params.height = screenHeightP /3;
             } else {
@@ -195,7 +199,7 @@ public class BottomSheetFragment extends DialogFragment {
             if (startingType.equals("intro")) {
                 params.height = this.screenHeightL/4;
                 params.width = this.screenWidthL * 3/5;
-                submit.setText("Start");
+//                submit.setText("Start");
             } else if (startingType.equals("likert") || startingType.equals("smiley")) {
                 params.height = screenHeightL * 5/9;
                 params.width = this.screenWidthL * 3/5;
@@ -215,79 +219,86 @@ public class BottomSheetFragment extends DialogFragment {
             @Override
             public void onPageSelected(int position) {
                 Log.i("onPageSelected", position + "showed and pagechangelistener works");
+                if (position == questionPacks.size() -1) {
+                    nextButton.setVisibility(View.GONE);
+                    completeButton.setVisibility(View.VISIBLE);
+                } else {
+                    nextButton.setVisibility(View.VISIBLE);
+                    completeButton.setVisibility(View.GONE);
+                }
                 BaseFragment currFrag = (BaseFragment) adapter.getItem(viewPager.getCurrentItem());
                 String currType = currFrag.getType();
                 if (currOrientation == Configuration.ORIENTATION_PORTRAIT) {
                     if (currType.equals("intro")) {
                         displayState = 0;
-                        submit.setText("Start");
+//                        submit.setText("Start");
                     } else if (currType.equals("outro")) {
                         displayState = 1;
                         ViewGroup.LayoutParams paramsQ = viewPager.getLayoutParams();
                         paramsQ.height = screenHeightP / 4;
                         viewPager.requestLayout();
-                        submit.setVisibility(View.GONE);
+//                        nextButton.setVisibility(View.GONE);
                         logo.setVisibility(View.GONE);
                         logoText.setVisibility(View.GONE);
-                        closeSurvey.setVisibility(View.VISIBLE);
+//                        completeButton.setVisibility(View.VISIBLE);
                         space.setVisibility(View.VISIBLE);
                     } else if (currType.equals("likert") || currType.equals("smiley")) {
                         displayState = 2;
                         ViewGroup.LayoutParams params1 = viewPager.getLayoutParams();
                         params1.height = screenHeightP / 3;
                         viewPager.requestLayout();
-                        submit.setVisibility(View.VISIBLE);
+//                        nextButton.setVisibility(View.VISIBLE);
                         logo.setVisibility(View.VISIBLE);
                         logoText.setVisibility(View.VISIBLE);
-                        closeSurvey.setVisibility(View.GONE);
-                        submit.setText("Next");
+//                        completeButton.setVisibility(View.GONE);
+//                        submit.setText("Next");
                     } else {
                         Log.i("viewPage", "height to max on question");
                         displayState = 3;
                         ViewGroup.LayoutParams paramsQ = viewPager.getLayoutParams();
                         paramsQ.height = screenHeightP * 8/17;
                         viewPager.requestLayout();
-                        submit.setVisibility(View.VISIBLE);
+//                        nextButton.setVisibility(View.VISIBLE);
                         logo.setVisibility(View.VISIBLE);
                         logoText.setVisibility(View.VISIBLE);
-                        closeSurvey.setVisibility(View.GONE);
-                        submit.setText("Next");
+//                        completeButton.setVisibility(View.GONE);
+//                        submit.setText("Next");
                     }
                 } else if (currOrientation == Configuration.ORIENTATION_LANDSCAPE) {
                     if (currType.equals("intro")) {
                         displayState = 0;
-                        submit.setText("Start");
+//                        submit.setText("Start");
                     } else if (currType.equals("outro")) {
                         displayState = 1;
                         ViewGroup.LayoutParams paramsQ = viewPager.getLayoutParams();
                         paramsQ.height = screenHeightP / 3;
                         viewPager.requestLayout();
-                        submit.setVisibility(View.GONE);
+//                        nextButton.setVisibility(View.GONE);
                         logo.setVisibility(View.GONE);
                         logoText.setVisibility(View.GONE);
-                        closeSurvey.setVisibility(View.VISIBLE);
+//                        completeButton.setVisibility(View.VISIBLE);
                         space.setVisibility(View.VISIBLE);
                     } else if (currType.equals("likert") || currType.equals("smiley")) {
                         displayState = 2;
                         ViewGroup.LayoutParams params1 = viewPager.getLayoutParams();
                         params1.height = screenHeightP * 5/9;
                         viewPager.requestLayout();
-                        submit.setVisibility(View.VISIBLE);
+//                        nextButton.setVisibility(View.VISIBLE);
                         logo.setVisibility(View.VISIBLE);
                         logoText.setVisibility(View.VISIBLE);
-                        closeSurvey.setVisibility(View.GONE);
-                        submit.setText("Next");
+//                        completeButton.setVisibility(View.GONE);
+//                        submit.setText("Next");
                     } else {
                         displayState = 3;
                         Log.i("viewPage", "height to max on question");
                         ViewGroup.LayoutParams paramsQ = viewPager.getLayoutParams();
                         paramsQ.height = screenHeightP * 5/9;
                         viewPager.requestLayout();
-                        submit.setVisibility(View.VISIBLE);
+//                        nextButton.setVisibility(View.VISIBLE);
                         logo.setVisibility(View.VISIBLE);
                         logoText.setVisibility(View.VISIBLE);
-                        closeSurvey.setVisibility(View.GONE);
-                        submit.setText("Next");
+//                        completeButton.setVisibility(View.GONE);
+//                        nextButton.setText("Next");
                     }
                 }
             }
@@ -298,7 +309,7 @@ public class BottomSheetFragment extends DialogFragment {
             }
         });
 
-        submit.setOnClickListener(new View.OnClickListener() {                                      //Submitting current question will move to next question
+        nextButton.setOnClickListener(new View.OnClickListener() {                                      //Submitting current question will move to next question
             @Override
             public void onClick(View view) {
 
@@ -384,7 +395,6 @@ public class BottomSheetFragment extends DialogFragment {
         ViewConstant.hasSurveyed = true;
         Log.i("bottomSheet", "destroyed");
         act.finish();
-
     }
 }
 

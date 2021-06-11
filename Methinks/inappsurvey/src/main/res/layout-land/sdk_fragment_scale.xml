@@ -81,7 +81,7 @@
                             android:letterSpacing="0.02"
                             android:lineSpacingExtra="12dp"
                             android:textColor="@color/silver"
-                            android:textSize="14dp"
+                            android:textSize="14sp"
 
                             android:gravity="center_vertical|start"
                             app:layout_constraintLeft_toLeftOf="parent" />
@@ -95,7 +95,7 @@
                             android:letterSpacing="0.02"
                             android:lineSpacingExtra="12dp"
                             android:textColor="@color/silver"
-                            android:textSize="14dp"
+                            android:textSize="14sp"
 
                             android:gravity="center"
                             android:layout_marginLeft="10dp"
@@ -112,7 +112,7 @@
                             android:letterSpacing="0.02"
                             android:lineSpacingExtra="12dp"
                             android:textColor="@color/silver"
-                            android:textSize="14dp"
+                            android:textSize="14sp"
 
                             android:gravity="center_vertical|end"
                             app:layout_constraintRight_toRightOf="parent" />

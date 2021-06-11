@@ -34,7 +34,7 @@
         android:scrollbars="vertical"
         android:text="Powered by"
         android:textColor="@color/charcoal_grey"
-        android:textSize="8dp"
+        android:textSize="8sp"
         app:fw="@string/font_weight_regular"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"

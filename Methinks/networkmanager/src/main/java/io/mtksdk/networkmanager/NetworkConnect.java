@@ -93,7 +93,7 @@ public class NetworkConnect extends  Activity{
         }
     }
 
-    public void setSDKUser(final String cKey, final String apiKey, final String bundleId, final String uuid, String os, String locale, String timeZoneStr, ArrayList<JSONArray> prevSData, String prevSId, Boolean prevSIsNew, ArrayList<String> prevEvent, String deviceModel, String carrier, final CallbackInterface callback) throws UnsupportedEncodingException {
+    public void setSDKUser(String cKey, String apiKey, String bundleId, String uuid, String os, String locale, String timeZoneStr, ArrayList<JSONArray> prevSData, String prevSId, Boolean prevSIsNew, ArrayList<String> prevEvent, String deviceModel, String carrier, final CallbackInterface callback) throws UnsupportedEncodingException {
         try {
             AsyncHttpClient clientSdk = new AsyncHttpClient();
 
@@ -160,7 +160,6 @@ public class NetworkConnect extends  Activity{
                 @Override
                 public void onFailure(int statusCode, Header[] headers, Throwable e, JSONObject response) {
                     callback.onDownloadFail(false, e);
-                    Log.i("setSDKInfo", "cKey : " + cKey + " aKey : " + apiKey + " uuid : " + uuid + " bundleId : " + bundleId);
                     Log.e("sdkServerSetSDK", "Fail: " + e.toString());
                     Log.d("sdkServerSetSDK", "StatusCode : " + statusCode);
                     /*Toast.makeText(getApplicationContext(), "Resquest Failed", Toast.LENGTH_SHORT).show();*/

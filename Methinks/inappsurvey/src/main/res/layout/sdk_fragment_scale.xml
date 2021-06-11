@@ -80,8 +80,8 @@
                             android:text="Bad"
                             android:letterSpacing="0.02"
                             android:lineSpacingExtra="12dp"
-                            android:textColor="@color/silver"
-                            android:textSize="14dp"
+                            android:textColor="@color/baseTextColor"
+                            android:textSize="14sp"
 
                             android:gravity="center_vertical|start"
                             app:layout_constraintLeft_toLeftOf="parent" />
@@ -94,8 +94,8 @@
                             android:text="Mid"
                             android:letterSpacing="0.02"
                             android:lineSpacingExtra="12dp"
-                            android:textColor="@color/silver"
-                            android:textSize="14dp"
+                            android:textColor="@color/baseTextColor"
+                            android:textSize="14sp"
 
                             android:gravity="center"
                             android:layout_marginLeft="10dp"
@@ -111,8 +111,8 @@
                             android:text="Good"
                             android:letterSpacing="0.02"
                             android:lineSpacingExtra="12dp"
-                            android:textColor="@color/silver"
-                            android:textSize="14dp"
+                            android:textColor="@color/baseTextColor"
+                            android:textSize="14sp"
 
                             android:gravity="center_vertical|end"
                             app:layout_constraintRight_toRightOf="parent" />

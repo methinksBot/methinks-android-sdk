@@ -9,8 +9,10 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 
@@ -48,8 +50,7 @@ public class SdkMultipleChoiceAdapter extends Section {
     private HashMap<String, ArrayList<Object>> answerMap;
     private String objId;
     private Question question;
-
-
+    private boolean isBinding;
 
 
     public SdkMultipleChoiceAdapter(Context context, Question question) {
@@ -67,20 +68,7 @@ public class SdkMultipleChoiceAdapter extends Section {
         this.mainLayouts = new HashMap<>();
         this.selectedPosition = new ArrayList<>();
         this.multipleSelection = (Boolean) question.getRule().get("allowMultipleSelection");
-
-        //saved answer setting
-//        ArrayList<Object> saved = this.answerMap.get(objId);
-//        if(saved != null && saved.size() > 0){  // exist saved answer(because of prev question)
-//            for(Object choice : saved){
-//                if(existValueInStringArray(this.choices, (String)choice)){  // just selected choice
-//                    for(int i = 0; i < this.choices.size(); i++){
-//                        if(this.choices.get(i).equals(choice)){
-//                            selectedPosition.add(i);
-//                        }
-//                    }
-//                }
-//            }
-//        }
+        this.isBinding = false;
     }
 
     @Override
@@ -101,51 +89,46 @@ public class SdkMultipleChoiceAdapter extends Section {
     @Override
     public void onBindItemViewHolder(RecyclerView.ViewHolder holder, final int position) {
         final ViewHolder itemHolder = (ViewHolder) holder;
-        itemHolder.setIsRecyclable(false);
         if(!viewHolders.containsKey(position)){
-            viewHolders.put(position, itemHolder);
-        }
-        RecyclerView.LayoutParams params = (RecyclerView.LayoutParams)itemHolder.itemView.getLayoutParams();
-        if(position == 0){  // for top margin
-            params.setMargins(0, (int) convertDpToPixel(context, 24), 0, 0);
-        }else{
-            params.setMargins(0, 0, 0, 0);
+            isBinding = true;
+//            viewHolders.put(position, itemHolder);
+        } else {
+            isBinding = false;
         }
 
-        itemHolder.itemView.setLayoutParams(params);
-
-        checkImages.put(position, itemHolder.imageView);
-        mainLayouts.put(position, itemHolder.mainLayout);
-        itemHolder.choiceForm.setVisibility(View.VISIBLE);
-        itemHolder.openEndAnswerForm.setVisibility(View.GONE);
-
-
-        hideKeyboard();
-
-        itemHolder.choiceForm.setVisibility(View.VISIBLE);
-        itemHolder.isOpenEndType = false;
-        itemHolder.underline.setVisibility(View.GONE);
-        itemHolder.choice.setVisibility(View.VISIBLE);
-        itemHolder.choice.setText(choices.get(position));
-        itemHolder.choice.setTextColor(context.getResources().getColor(R.color.charcoal_grey));
-        itemHolder.openEndAnswerForm.setVisibility(View.GONE);
-
-        itemHolder.imageView.setClickable(false);
-        itemHolder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                hideKeyboard();
-                handleSelectedPosition(multipleSelection, true, position, itemHolder);
+        if (isBinding) {
+            RecyclerView.LayoutParams params = (RecyclerView.LayoutParams)itemHolder.itemView.getLayoutParams();
+            if(position == 0){  // for top margin
+                params.setMargins(0, (int) convertDpToPixel(context, 24), 0, 0);
+            }else{
+                params.setMargins(0, 0, 0, 0);
             }
-        });
+
+            itemHolder.itemView.setLayoutParams(params);
+            itemHolder.textContainer.setVisibility(View.VISIBLE);
+            itemHolder.openEndAnswerForm.setVisibility(View.GONE);
+            hideKeyboard();
+            itemHolder.isOpenEndType = false;
+            itemHolder.choice.setVisibility(View.VISIBLE);
+            itemHolder.choice.setText(choices.get(position));
+            itemHolder.choice.setTextColor(context.getResources().getColor(R.color.baseTextColor));
+            itemHolder.openEndAnswerForm.setVisibility(View.GONE);
+            itemHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    hideKeyboard();
+                    handleSelectedPosition(multipleSelection, true, position, itemHolder);
+                }
+            });
+            isBinding = false;
+        }
 
         if(selectedPosition.contains(position)){    // current position contained into selected
-            itemHolder.imageView.setImageResource(R.drawable.img_single_select_active_color_01);
-            itemHolder.mainLayout.setBackgroundColor(context.getResources().getColor(R.color.pale_grey_five));
+            makeViewHolderSelected(itemHolder, true);
         }else{
-            itemHolder.imageView.setImageResource(R.drawable.ic_img_single_select_nor);
-            itemHolder.mainLayout.setBackgroundColor(context.getResources().getColor(R.color.white));
+            makeViewHolderSelected(itemHolder, false);
         }
+        viewHolders.put(position, itemHolder);
     }
 
     @Override
@@ -184,12 +167,10 @@ public class SdkMultipleChoiceAdapter extends Section {
         if (isMultiple) { //multiple selection
             if (selectedPosition.contains(position)){    // exist selected position(check remove action)
                 selectedPosition.remove(selectedPosition.indexOf(position));
-                viewHolder.imageView.setImageResource(R.drawable.ic_img_single_select_nor);
-                viewHolder.mainLayout.setBackgroundColor(context.getResources().getColor(R.color.white));
+                makeViewHolderSelected(viewHolder, false);
             } else  {
                 selectedPosition.add(position);
-                viewHolder.imageView.setImageResource(R.drawable.img_single_select_active_color_01);
-                viewHolder.mainLayout.setBackgroundColor(context.getResources().getColor(R.color.pale_grey_five));
+                makeViewHolderSelected(viewHolder, true);
             }
         } else { //single selection
             if(selectedPosition.contains(position)) {
@@ -197,19 +178,16 @@ public class SdkMultipleChoiceAdapter extends Section {
                 if (selectedPosition.size() == 0) {
                     Log.e("Single", "resetting the position worked");
                 }
-                viewHolder.imageView.setImageResource(R.drawable.ic_img_single_select_nor);
-                viewHolder.mainLayout.setBackgroundColor(context.getResources().getColor(R.color.white));
+                makeViewHolderSelected(viewHolder, false);
             } else {
+                for (Integer index : viewHolders.keySet()) {
+                    ViewHolder currViewHolder = viewHolders.get(index);
+                    if (index + 1 == currViewHolder.getAdapterPosition()) {
+                        makeViewHolderSelected(currViewHolder, index == position ? true : false);
+                    }
+                }
                 selectedPosition.clear();
-                for(Integer index : checkImages.keySet()){
-                    checkImages.get(index).setImageResource(R.drawable.ic_img_single_select_nor);
-                }
-                for(Integer index : mainLayouts.keySet()){
-                    mainLayouts.get(index).setBackgroundColor(context.getResources().getColor(R.color.white));
-                }
                 selectedPosition.add(position);
-                viewHolder.imageView.setImageResource(R.drawable.img_single_select_active_color_01);
-                viewHolder.mainLayout.setBackgroundColor(context.getResources().getColor(R.color.pale_grey_five));
             }
         }
 
@@ -223,33 +201,45 @@ public class SdkMultipleChoiceAdapter extends Section {
         question.setAnswerMap(answer);
     }
 
+    private void makeViewHolderSelected(ViewHolder viewHolder, boolean selected) {
+        viewHolder.textContainer.setSelected(selected);
+        viewHolder.selectionIcon.setSelected(selected);
+    }
+
 
 
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public View itemView;
-        public LinearLayout mainLayout;
-        public ImageView imageView;
+        public ConstraintLayout mainLayout;
+        public ImageView selectionIcon;
         public TextView choice;
-        public LinearLayout openEndAnswerForm, choiceForm;
+        public LinearLayout openEndAnswerForm;
         public EditText answerForOpenEnd;
-        public View underline;
-        public View underlineForOpenEnd;
+        public ImageView attachedImage;
+        public ProgressBar pbLoading;
         public boolean isOpenEndType;
+        public boolean isCreating;
+        public boolean hasEntryAnswer;
+        public View textContainer;
+        public LinearLayout nonOpenEndtype;
 
         public ViewHolder(View itemView) {
             super(itemView);
             this.mainLayout = itemView.findViewById(R.id.cell_multiple_choice_main_layout);
+            this.textContainer = itemView.findViewById(R.id.ll_text_container);
             this.itemView = itemView;
-            this.imageView = itemView.findViewById(R.id.check_box);
-            this.choice = itemView.findViewById(R.id.choice);
-            this.openEndAnswerForm = itemView.findViewById(R.id.open_end_answer_form);
-            this.choiceForm = itemView.findViewById(R.id.choice_form);
-            this.answerForOpenEnd = itemView.findViewById(R.id.open_end_answer);
-            this.underline = itemView.findViewById(R.id.underline);
-            this.underlineForOpenEnd = itemView.findViewById(R.id.open_end_answer_underline);
-
-            openEndEditTextContainer = openEndAnswerForm;
+            this.selectionIcon = itemView.findViewById(R.id.iv_choice);
+            this.pbLoading = itemView.findViewById(R.id.pb_loading);
+            this.attachedImage = itemView.findViewById(R.id.iv_image);
+            this.choice = itemView.findViewById(R.id.tv_text);
+            this.openEndAnswerForm = itemView.findViewById(R.id.ll_text_entry_container);
+            this.nonOpenEndtype = itemView.findViewById(R.id.non_lastEntry);
+            this.answerForOpenEnd = itemView.findViewById(R.id.ev_answer);
+            this.isOpenEndType = false;
+            this.isCreating = false;
+            this.hasEntryAnswer = false;
+//            openEndEditTextContainer = openEndAnswerForm;
         }
     }
 

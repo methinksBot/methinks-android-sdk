@@ -15,7 +15,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             android:text="@string/common_msg_change_how_you_answer"
-            android:textSize="16dp"
+            android:textSize="16sp"
             app:fw="@string/font_weight_regular"
 
             android:textColor="@color/charcoal_grey"
@@ -61,7 +61,7 @@
             android:id="@+id/replace_to_text_text_view"
             app:layout_constraintLeft_toRightOf="@id/text_icon"
             android:text="@string/common_text_text_answer"
-            android:textSize="16dp"
+            android:textSize="16sp"
             app:fw="@string/font_weight_regular"
 
             android:textColor="@color/charcoal_grey"
@@ -93,7 +93,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toRightOf="@id/voice_icon"
             android:text="@string/common_text_voice_answer"
-            android:textSize="16dp"
+            android:textSize="16sp"
             app:fw="@string/font_weight_regular"
 
             android:textColor="@color/charcoal_grey"
@@ -125,7 +125,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toRightOf="@id/video_icon"
             android:text="@string/common_text_video_answer"
-            android:textSize="16dp"
+            android:textSize="16sp"
             app:fw="@string/font_weight_regular"
 
             android:textColor="@color/charcoal_grey"

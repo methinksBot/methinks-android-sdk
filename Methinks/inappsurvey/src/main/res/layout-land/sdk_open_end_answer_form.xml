@@ -20,7 +20,7 @@
             android:maxLines="3"
             android:lines="3"
             android:hint="Enter your answer here."
-            android:textSize="14dp"
+            android:textSize="14sp"
             app:fw="@string/font_weight_regular"
 
             android:textColor="@color/charcoal_grey"
